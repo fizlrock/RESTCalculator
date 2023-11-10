@@ -15,7 +15,7 @@ public class MathController : ControllerBase
         _logger = logger;
     }
 
-    [Route("Math/Computing")]
+    [Route("Math/Postfix")]
     [HttpGet]
     public string GetToPolis(string mathExpression)
     {
@@ -29,7 +29,7 @@ public class MathController : ControllerBase
         return "здесь тоже что то будет";
     }
 
-    [Route("Math/Postfix")]
+    [Route("Math/Computing")]
     [HttpGet]
     public double GetToValue(string mathExpression)
     {
