@@ -19,3 +19,4 @@ REST API приложение для математических вычисле
 * string - mathExpression - математическое выражение
 * string - polis - выражение в постфиксной форме
 * double - result - вычисленное значение
+linux
