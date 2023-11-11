@@ -33,7 +33,7 @@ public class MathController : ControllerBase
 
     [Route("Math/Computing")]
     [HttpGet]
-    public double GetToValue(string mathExpression)
+    public double GetValue(string mathExpression)
     {
         return 0;
     }
