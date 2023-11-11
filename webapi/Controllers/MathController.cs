@@ -15,7 +15,7 @@ public class MathController : ControllerBase
         _logger = logger;
     }
 
-    [Route("Math/Postfix")]
+    [Route("/Postfix")]
     [HttpGet]
     public string GetPolisForm(string mathExpression)
     {
@@ -23,14 +23,14 @@ public class MathController : ControllerBase
         return MathUtils.fromInficsToPolis(mathExpression);
     }
 
-    [Route("Math/Infix")]
+    [Route("/Infix")]
     [HttpGet]
     public string GetInfixForm(string mathExpression)
     {
         return MathUtils.fromPolisToInfics(mathExpression);
     }
 
-    [Route("Math/Computing")]
+    [Route("/Computing")]
     [HttpGet]
     public double GetValue(string mathExpression)
     {
