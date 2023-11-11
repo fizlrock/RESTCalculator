@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Calc.Models;
 public class MathUtils
 {
     //Перевод строки из Полиз в инфикс
