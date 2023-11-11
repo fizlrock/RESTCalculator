@@ -24,11 +24,6 @@ public class MathUtils
     {
         throw new NotImplementedException();
     }
-
-    public static double calculate(string polis)
-    {
-        throw new NotImplementedException();
-    }
     public static double calculate(string infics)
     {
         throw new NotImplementedException();
