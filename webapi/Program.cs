@@ -1,4 +1,10 @@
-//https://localhost:<port>/swagger
+
+using Serilog;
+Log.Logger = new LoggerConfiguration()
+		.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Console()
+    .CreateLogger();
+
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
+builder.Host.UseSerilog();
 
 WebApplication app = builder.Build();
 
@@ -26,6 +33,10 @@ app.MapControllers();
 app.UseCors("CorsPolicy");
 
 app.Run();
+
+
+Log.CloseAndFlush();
+
 
 
 
