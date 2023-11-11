@@ -4,14 +4,13 @@ using Calc.Models;
 namespace webapi.Controllers;
 
 [ApiController]
-
-
+[Route("api/[controller]")]
 public class MathController : ControllerBase
 {
 
     private readonly ILogger<MathController> _logger;
 
-    public MathController(ILogger<MathController> logger)
+    public MathController(ILogger<MathController> logger, MathRequestContext db)
     {
         _logger = logger;
     }
@@ -21,7 +20,7 @@ public class MathController : ControllerBase
     public string GetPolisForm(string mathExpression)
     {
 				_logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        return "здесь что то будет";
+        return "fuck you";
     }
 
     [Route("Math/Infix")]

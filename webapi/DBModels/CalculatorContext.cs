@@ -4,21 +4,19 @@ using Calc.Models;
 using System;
 using System.Collections.Generic;
 
-namespace EF_1.Models;
 
 
 public class MathRequestContext : DbContext
 {
-    public MathRequestContext()
+
+    public MathRequestContext(DbContextOptions<MathRequestContext> options)
+
+        : base(options)
     {
-        DbPath = "/home/fizlrock/code/hobby/EF/EF_1/requests.db";
+        Database.EnsureCreated();   // создаем базу данных при первом обращении
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    => options.UseSqlite($"Data Source={DbPath}");
-
-    public DbSet<MathRequest> MathRequests { get; set; }
-    public string DbPath { get; }
+    public DbSet<MathRequest> MathRequests { get; set; } = null!;
 
 
 }

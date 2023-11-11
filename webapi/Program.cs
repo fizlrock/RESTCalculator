@@ -1,5 +1,6 @@
-
+// Создание логгера
 using Serilog;
+using Microsoft.EntityFrameworkCore;
 Log.Logger = new LoggerConfiguration()
 		.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
     .WriteTo.Console()
@@ -7,6 +8,10 @@ Log.Logger = new LoggerConfiguration()
 
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Настройка подключения к БД
+string connection = builder.Configuration.GetConnectionString("DefaultConnection")!;
+builder.Services.AddDbContext<MathRequestContext>(options => options.UseSqlite(connection));
 
 // Add services to the container.
 
