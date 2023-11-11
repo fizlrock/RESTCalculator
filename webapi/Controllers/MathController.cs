@@ -20,6 +20,7 @@ public class MathController : ControllerBase
     [HttpGet]
     public string GetPolisForm(string mathExpression)
     {
+				_logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
         return "здесь что то будет";
     }
 
