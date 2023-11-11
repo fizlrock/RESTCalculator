@@ -1,5 +1,5 @@
 ﻿namespace Domain;
-public class Class1
+public class MathUtils
 {
     //Перевод строки из Полиз в инфикс
     public static string fromPolisToInfics(string polis)
