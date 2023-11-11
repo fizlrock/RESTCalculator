@@ -17,24 +17,23 @@ public class MathController : ControllerBase
 
     [Route("/Postfix")]
     [HttpGet]
-    public string GetPolisForm(string mathExpression)
+    public ActionResult<string> GetPolisForm(string mathExpression)
     {
-				_logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        return MathUtils.fromInficsToPolis(mathExpression);
+        return Ok(MathUtils.fromInficsToPolis(mathExpression));
     }
 
     [Route("/Infix")]
     [HttpGet]
-    public string GetInfixForm(string mathExpression)
+    public ActionResult<string> GetInfixForm(string mathExpression)
     {
-        return MathUtils.fromPolisToInfics(mathExpression);
+        return Ok(MathUtils.fromPolisToInfics(mathExpression));
     }
 
     [Route("/Computing")]
     [HttpGet]
-    public double GetValue(string mathExpression)
+    public ActionResult<double> GetValue(string mathExpression)
     {
-        return MathUtils.calculate(mathExpression);
+        return Ok(MathUtils.calculate(mathExpression));
     }
 
 }
