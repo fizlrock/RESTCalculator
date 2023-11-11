@@ -20,21 +20,21 @@ public class MathController : ControllerBase
     public string GetPolisForm(string mathExpression)
     {
 				_logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        return "fuck you";
+        return MathUtils.fromInficsToPolis(mathExpression);
     }
 
     [Route("Math/Infix")]
     [HttpGet]
     public string GetInfixForm(string mathExpression)
     {
-        return "здесь тоже что то будет";
+        return MathUtils.fromPolisToInfics(mathExpression);
     }
 
     [Route("Math/Computing")]
     [HttpGet]
     public double GetValue(string mathExpression)
     {
-        return 0;
+        return MathUtils.calculate(mathExpression);
     }
 
 }
