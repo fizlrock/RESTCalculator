@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Calc.Models;
 
 namespace webapi.Controllers;
 
@@ -17,14 +18,14 @@ public class MathController : ControllerBase
 
     [Route("Math/Postfix")]
     [HttpGet]
-    public string GetToPolis(string mathExpression)
+    public string GetPolisForm(string mathExpression)
     {
         return "здесь что то будет";
     }
 
     [Route("Math/Infix")]
     [HttpGet]
-    public string GetToInfix(string mathExpression)
+    public string GetInfixForm(string mathExpression)
     {
         return "здесь тоже что то будет";
     }

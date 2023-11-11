@@ -20,6 +20,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseForwardedHeaders();
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors("CorsPolicy");
