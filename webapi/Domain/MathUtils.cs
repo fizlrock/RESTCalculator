@@ -14,7 +14,7 @@ using System;
             check[4] = new Table("*", 2);
             check[5] = new Table("/", 2);
         }
-        Перевод строки из Полиз в инфикс
+        //Перевод строки из Полиз в инфикс
         public static string fromPolisToInfics(string polis)
         {
             throw new NotImplementedException();
@@ -53,6 +53,7 @@ using System;
         private static int findWeigth(string a)
         {
             string b;
+
             for (int i = 0; i<check.Length; i++)
             {
                 if (a == check[i].getOper())
