@@ -13,10 +13,17 @@ public class MathRequestContext : DbContext
 
         : base(options)
     {
-			this.Database.EnsureCreated();
+        this.Database.EnsureCreated();
     }
 
     public DbSet<MathRequest> MathRequests { get; set; } = null!;
+
+
+    protected override void OnModelCreating(ModelBuilder mb)
+    {
+			mb.Entity<InfixPOLISPair>()
+				.HasKey(c => new { c.POLIS, c.Infix});
+    }
 
 
 }
