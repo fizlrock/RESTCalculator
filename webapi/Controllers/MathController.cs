@@ -32,8 +32,7 @@ public class MathController : ControllerBase
             result = db_value.POLIS;
         else
         {
-						result = "";
-						// Дописать
+						result = MathUtils.fromInficsToPolis(mathExpression);
 
         }
 
