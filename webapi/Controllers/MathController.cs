@@ -23,14 +23,15 @@ public class MathController : ControllerBase
     public ActionResult<string> GetPolisForm(string mathExpression)
     {
         _logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        db.MathRequests.Add(
 
+        db.MathRequests.Add(
                 new MathRequest() { 
 								PolisForm = "",
 								PostfixForm = mathExpression
 								}
                 );
-				db.SaveChanges();
+
+				db.SaveChangesAsync();
 
         //return Ok(MathUtils.fromInficsToPolis(mathExpression));
          return Ok("временно");
