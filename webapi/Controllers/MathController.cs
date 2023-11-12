@@ -22,22 +22,32 @@ public class MathController : ControllerBase
     [HttpGet]
     public ActionResult<string> GetPolisForm(string mathExpression)
     {
-        _logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
+        _logger.LogInformation($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
 
         string result = "";
 
         var db_value = db.InfixPOLISPairs.Where(p => p.Infix.Equals(mathExpression)).SingleOrDefault();
 
         if (db_value != null)
+        {
+            _logger.LogInformation($"Выражение {mathExpression} найдено в БД");
             result = db_value.POLIS;
+        }
         else
         {
-						result = MathUtils.fromInficsToPolis(mathExpression);
+            _logger.LogInformation($"Вычисление ПОЛИЗ для {mathExpression}");
+            result = MathUtils.fromInficsToPolis(mathExpression);
+            db.InfixPOLISPairs.Add(
+                    new InfixPOLISPair()
+                    {
+                        POLIS = result,
+                        Infix = mathExpression
+                    }
+                    );
+            db.SaveChanges();
 
         }
 
-
-        //return Ok(MathUtils.fromInficsToPolis(mathExpression));
         return Ok(result);
     }
 
@@ -45,8 +55,35 @@ public class MathController : ControllerBase
     [HttpGet]
     public ActionResult<string> GetInfixForm(string mathExpression)
     {
-        // return Ok(MathUtils.fromPolisToInfics(mathExpression));
-        return Ok("временно");
+
+        _logger.LogInformation($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
+
+        string result = "";
+
+        var db_value = db.InfixPOLISPairs.Where(p => p.POLIS.Equals(mathExpression)).SingleOrDefault();
+
+        if (db_value != null)
+        {
+            _logger.LogInformation($"Выражение {mathExpression} найдено в БД");
+            result = db_value.Infix;
+        }
+        else
+        {
+            _logger.LogInformation($"Вычисление инфиксной формы для {mathExpression}");
+            result = MathUtils.fromInficsToPolis(mathExpression);
+            db.InfixPOLISPairs.Add(
+                    new InfixPOLISPair()
+                    {
+                        POLIS = mathExpression,
+                        Infix = result
+                    }
+                    );
+            db.SaveChanges();
+
+        }
+
+        return Ok(result);
+
     }
 
     [Route("Computing")]
