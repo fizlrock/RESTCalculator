@@ -1,7 +1,7 @@
 ﻿namespace Calc.Models;
 public class MathUtils
 {
-    private string [] lib  = {'1','2','3','4','5','6','7','8','9','0','(',')','+','-','*','/'};
+    private string[] lib =  new string[]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "(", ")", "+", "-", "*", "/" };
 
     //Перевод строки из Полиз в инфикс
     public static string fromPolisToInfics(string polis)
@@ -16,14 +16,14 @@ public class MathUtils
         // }
         throw new NotImplementedException();
     }
-    
-    private static class Table (string oper1, int weight1)
+
+    private static class Table(string oper1, int weight1)
     {
         string oper = oper1;
         int weight = weight1;
-    } 
+    }
 
-    private static bool isNumber (string a)
+    private static bool isNumber(string a)
     {
         int x = 0;
         if (Int32.TryParse(a, out x))
@@ -33,18 +33,18 @@ public class MathUtils
     public static string fromInficsToPolis(string infics)
     {
         Table[] check = new Table[]{
-            ('(', 10), 
-            (')', 0), 
-            ('+', 1), 
-            ('-', 1), 
-            ('*', 2), 
-            ('/', 2) };
+            ("(", 10),
+            (")", 0),
+            ("+", 1),
+            ("-", 1),
+            ("*", 2),
+            ("/", 2) };
 
-        string [] line = infics.split([separator[]]);
+        string[] line = infics.split([separator[]]);
 
-        if(isPolis(infics))
+        if (isPolis(infics))
         {
-            
+
         }
 
         throw new NotImplementedException();
@@ -53,10 +53,10 @@ public class MathUtils
     private bool isPolis(string polis)
     {
         bool a = 0;
-        string [] line = infics.split([separator[]]);
-        for (int i = 0; i<line.Length; i++)
+        string[] line = infics.split([separator[]]);
+        for (int i = 0; i < line.Length; i++)
         {
-            for (int j = 0; j<lib.Length; i++)
+            for (int j = 0; j < lib.Length; i++)
             {
                 if (line[i] == lib[j])
                     a = 1;
