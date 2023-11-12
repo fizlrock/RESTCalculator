@@ -1,6 +1,7 @@
 // Создание логгера
 using Serilog;
 using Microsoft.EntityFrameworkCore;
+using Calc.Models;
 Log.Logger = new LoggerConfiguration()
         .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
     .WriteTo.Console()

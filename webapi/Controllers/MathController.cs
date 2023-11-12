@@ -23,18 +23,18 @@ public class MathController : ControllerBase
     public ActionResult<string> GetPolisForm(string mathExpression)
     {
         _logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
+        db.InfixPOLISPairs.Add(
+        new InfixPOLISPair
+        {
+            POLIS = "",
+            Infix = mathExpression
+        }
+        );
+        db.SaveChangesAsync();
 
-        db.MathRequests.Add(
-                new MathRequest() { 
-								PolisForm = "",
-								PostfixForm = mathExpression
-								}
-                );
-
-				db.SaveChangesAsync();
 
         //return Ok(MathUtils.fromInficsToPolis(mathExpression));
-         return Ok("временно");
+        return Ok("временно");
     }
 
     [Route("Infix")]
@@ -42,7 +42,7 @@ public class MathController : ControllerBase
     public ActionResult<string> GetInfixForm(string mathExpression)
     {
         // return Ok(MathUtils.fromPolisToInfics(mathExpression));
-         return Ok("временно");
+        return Ok("временно");
     }
 
     [Route("Computing")]
@@ -50,7 +50,7 @@ public class MathController : ControllerBase
     public ActionResult<double> GetValue(string mathExpression)
     {
         //return Ok(MathUtils.calculate(mathExpression));
-         return Ok("временно");
+        return Ok("временно");
     }
 
 }

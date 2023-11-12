@@ -1,4 +1,6 @@
 
+namespace Calc.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Calc.Models;
 using System;
@@ -16,13 +18,19 @@ public class MathRequestContext : DbContext
         this.Database.EnsureCreated();
     }
 
-    public DbSet<MathRequest> MathRequests { get; set; } = null!;
+    public DbSet<InfixPOLISPair> InfixPOLISPairs { get; set; } = null!;
+    public DbSet<MathResult> MathResults { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
-			mb.Entity<InfixPOLISPair>()
-				.HasKey(c => new { c.POLIS, c.Infix});
+        mb.Entity<InfixPOLISPair>()
+            .HasKey(c => new { c.POLIS, c.Infix });
+        mb.Entity<InfixPOLISPair>()
+						.HasOne(e => e.Result);
+
+						
+
     }
 
 
