@@ -2,16 +2,24 @@
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 Log.Logger = new LoggerConfiguration()
-		.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+        .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
     .WriteTo.Console()
     .CreateLogger();
 
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Настройка подключения к БД
-string connection = builder.Configuration.GetConnectionString("DefaultConnection")!;
-builder.Services.AddDbContext<MathRequestContext>(options => options.UseSqlite(connection));
+// Настройка подключения к БД"
+
+string connection = "Data Source=/home/fizlrock/code/hobby/Calculator/webapi/Database/mydb.db;";
+//string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+Log.Warning($"юзаем бд по адресу: {connection}");
+builder.Services.AddDbContext<MathRequestContext>(
+        options =>
+        {
+            options.UseSqlite(connection);
+            options.LogTo(Log.Logger.Debug);
+        });
 
 // Add services to the container.
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Calc.Models;
 
 namespace webapi.Controllers;
@@ -9,28 +10,39 @@ public class MathController : ControllerBase
 {
 
     private readonly ILogger<MathController> _logger;
+    private MathRequestContext db;
 
     public MathController(ILogger<MathController> logger, MathRequestContext db)
     {
         _logger = logger;
+        this.db = db;
     }
 
-    [Route("Math/Postfix")]
+    [Route("Postfix")]
     [HttpGet]
     public string GetPolisForm(string mathExpression)
     {
-				_logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        return "fuck you";
+        _logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
+        db.MathRequests.Add(
+                new MathRequest() { 
+								PolisForm = "",
+								PostfixForm = mathExpression
+								}
+                );
+				db.SaveChanges();
+
+        //return MathUtils.fromInficsToPolis(mathExpression);
+        return "arst";
     }
 
-    [Route("Math/Infix")]
+    [Route("Infix")]
     [HttpGet]
     public string GetInfixForm(string mathExpression)
     {
         return "здесь тоже что то будет";
     }
 
-    [Route("Math/Computing")]
+    [Route("Computing")]
     [HttpGet]
     public double GetValue(string mathExpression)
     {

@@ -13,7 +13,7 @@ public class MathRequestContext : DbContext
 
         : base(options)
     {
-        Database.EnsureCreated();   // создаем базу данных при первом обращении
+			this.Database.EnsureCreated();
     }
 
     public DbSet<MathRequest> MathRequests { get; set; } = null!;
