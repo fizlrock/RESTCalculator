@@ -23,18 +23,23 @@ public class MathController : ControllerBase
     public ActionResult<string> GetPolisForm(string mathExpression)
     {
         _logger.LogWarning($"Запрос на преобразование строки в ПОЛИЗ. mathExpression:{mathExpression}");
-        db.InfixPOLISPairs.Add(
-        new InfixPOLISPair
+
+        string result = "";
+
+        var db_value = db.InfixPOLISPairs.Where(p => p.Infix.Equals(mathExpression)).SingleOrDefault();
+
+        if (db_value != null)
+            result = db_value.POLIS;
+        else
         {
-            POLIS = "",
-            Infix = mathExpression
+						result = "";
+						// Дописать
+
         }
-        );
-        db.SaveChangesAsync();
 
 
         //return Ok(MathUtils.fromInficsToPolis(mathExpression));
-        return Ok("временно");
+        return Ok(result);
     }
 
     [Route("Infix")]
